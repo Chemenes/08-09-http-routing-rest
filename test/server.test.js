@@ -7,20 +7,27 @@ const turkey = require('../model/turkey');
 const apiUrl = 'http://localhost:5000/api/v1/turkey';
 
 const mockResource = {
-  title: 'test title',
-  content: 'test content',
+  flavor: 'test flavor',
+  style: 'test style',
 };
 
 beforeAll(() => server.start(5000));
 afterAll(() => server.stop());
+
+describe('post to /api/v1/turkey', () => {
+  test('200 for successful saving of a new note', () => {
+    return superagent.post(apiurl)
+    .send(mockResource)
+  })
+})
 
 describe('POST to /api/v1/turkey', () => {
   test('200 for successful saving of a new turkey', () => {
     return superagent.post(apiUrl)
       .send(mockResource)
       .then((response) => {
-        expect(response.body.title).toEqual(mockResource.title);
-        expect(response.body.content).toEqual(mockResource.content);
+        expect(response.body.flavor).toEqual(mockResource.flavor);
+        expect(response.body.style).toEqual(mockResource.style);
         expect(response.body._id).toBeTruthy();
         expect(response.status).toEqual(200);
       })
@@ -60,8 +67,8 @@ describe('GET /api/v1/turkey', () => {
     return superagent.get(`${apiUrl}?id=${mockResourceForGet._id}`)
       .then((response) => {
         expect(response.status).toEqual(200);
-        expect(response.body.title).toEqual(mockResourceForGet.title);
-        expect(response.body.content).toEqual(mockResourceForGet.content);
+        expect(response.body.flavor).toEqual(mockResourceForGet.flavor);
+        expect(response.body.style).toEqual(mockResourceForGet.style);
         expect(response.body.createdOn).toEqual(mockResourceForGet.createdOn.toISOString());
       })
       .catch((err) => {

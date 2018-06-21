@@ -7,8 +7,8 @@ module.exports = class Turkey {
   constructor(config) {
     this._id = uuid();
     this.createdOn = new Date();
-    this.title = config.title;
-    this.content = config.content || '';
+    this.flavor = config.flavor;
+    this.style = config.style || '';
   }
 
   save() {
