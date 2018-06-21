@@ -1,7 +1,7 @@
 'use strict';
 
 const uuid = require('uuid/v4');
-const storage = require('../lib/storage');
+const storage = require('../lib/storage/memory');
 
 module.exports = class Turkey {
   constructor(config) {
@@ -21,7 +21,7 @@ module.exports = class Turkey {
  * rather use them as top level functions.
  * i.e.
  *    This will use the instance method "save" to save the note we just created
- *    let myNote = new Note({title:'Hi',content:'There'});
+ *    let myNote = new Note({ :'Hi',content:'There'});
  *    myNote.save();
  *
  *    To view a single note you would call the method on the constructor istelf:
