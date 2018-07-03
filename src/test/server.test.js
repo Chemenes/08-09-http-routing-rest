@@ -14,12 +14,6 @@ const mockResource = {
 beforeAll(() => server.start(5000));
 afterAll(() => server.stop());
 
-describe('post to /api/v1/turkey', () => {
-  test('200 for successful saving of a new note', () => {
-    return superagent.post(apiurl)
-    .send(mockResource)
-  })
-})
 
 describe('POST to /api/v1/turkey', () => {
   test('200 for successful saving of a new turkey', () => {
@@ -32,12 +26,12 @@ describe('POST to /api/v1/turkey', () => {
         expect(response.status).toEqual(200);
       })
       .catch((err) => {
-        // I still want to handle errors in the catch block in case we fail
+       
         throw err;
       });
   });
 
-  test('400 for a bad request', () => {
+  test('400 bad request', () => {
     return superagent.post(apiUrl)
       .send({})
       .then((response) => {
@@ -50,7 +44,7 @@ describe('POST to /api/v1/turkey', () => {
   });
 });
 
-describe('GET /api/v1/turkey', () => {
+describe('GET /api/v1/turkeys', () => {
   let mockResourceForGet;
   beforeEach(() => {
     const newTurkey = new Turkey(mockResource);
@@ -74,6 +68,61 @@ describe('GET /api/v1/turkey', () => {
       .catch((err) => {
         throw err;
       });
+  });
+
+  test ('404 bad GET request', () => {
+    return superagent.get(`${apiUrl}`)
+    .then((response) => {
+      throw err;
+    })
+    .catch((err) => {
+      expect (err.status).toEqual(404);
+    });
+  }
+});
+
+describe('DELETE /api/v1/turkeys', () => {
+  let mockResourceForGet;
+  beforeEach((done) => {
+    const newTurkey = new Turkey(mockResource);
+    newTurkey.save()
+    .then((turkey) => {
+      mockResourceForGet = turkey;
+      done();
+    })
+    .catch((err) => {
+      throw err;
+    });
+  });
+  test('200 successful DELETE request', () =>  {
+    console.log(`DELETE ${mockResponseForGet._id}`);
+    return superagent.delete(`${apiUrl}?id=${mockResponseForGet._id}`)
+    .then((response) => {
+      expect(response.status).toEqual(200);
+    })
+    .catch((err) => {
+      throw err;
+    });
+  });
+  test('404 bad DELETE request', () => {
+    return superagent.delete(`${apiUrl}`)
+    .then((response) => {
+      throw err;
+    })
+    .catch((err) => {
+      expect(err.status).toEqual(404);
+    });
+  });
+});
+describe('bad request no input', () => {
+  test('404 bad request', () => {
+    return superagent.get(`${apiUrl}`)
+    .then((response) => {
+      throw err;
+    })
+    .catch((err) => {
+      expect(err.status).toEqual(404);
+    });
   });
 });
 
