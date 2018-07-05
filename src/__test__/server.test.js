@@ -1,8 +1,8 @@
 'use strict';
 
 const superagent = require('superagent');
-const server = require('../lib/server');
-const turkey = require('../model/turkey');
+const server = require('../../lib/server');
+const turkey = require('../../model/turkey');
 
 const apiUrl = 'http://localhost:5000/api/v1/turkey';
 
