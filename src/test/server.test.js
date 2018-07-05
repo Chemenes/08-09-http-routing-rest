@@ -32,7 +32,7 @@ describe('POST to /api/v1/turkey', () => {
         expect(response.status).toEqual(200);
       })
       .catch((err) => {
-        // I still want to handle errors in the catch block in case we fail
+       
         throw err;
       });
   });
