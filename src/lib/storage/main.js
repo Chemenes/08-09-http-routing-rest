@@ -1,7 +1,8 @@
 'use strict';
 
-import { startServer } from './lib/server';
+const fileSystem = require('./file-system');
+const memory = require('./memory');
 
-const logger = require('./lib/logger.js');
+require('dotenv').config();
 
-startServer(process.env.PORT, () => logger.log(logger.INFO, `MAIN: listening on ${process.env.PORT}`));
+module.exports = process.env.STORAGE === 'filesystem' ? fileSystem : memory;

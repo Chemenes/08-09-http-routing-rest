@@ -1,8 +1,8 @@
 'use strict';
 
 const superagent = require('superagent');
-const server = require('../../lib/server');
-const turkey = require('../../model/turkey');
+const server = require('../lib/server');
+const Turkey = require('../model/turkey');
 
 const apiUrl = 'http://localhost:5000/api/v1/turkey';
 
@@ -11,15 +11,15 @@ const mockResource = {
   style: 'test style',
 };
 
-beforeAll(() => server.start(5000));
-afterAll(() => server.stop());
+beforeAll(() => server.serverStart(5000));
+afterAll(() => server.serverStop());
 
 describe('post to /api/v1/turkey', () => {
   test('200 for successful saving of a new note', () => {
-    return superagent.post(apiurl)
-    .send(mockResource)
-  })
-})
+    return superagent.post(apiUrl)
+      .send(mockResource);
+  });
+});
 
 describe('POST to /api/v1/turkey', () => {
   test('200 for successful saving of a new turkey', () => {
@@ -32,7 +32,6 @@ describe('POST to /api/v1/turkey', () => {
         expect(response.status).toEqual(200);
       })
       .catch((err) => {
-       
         throw err;
       });
   });

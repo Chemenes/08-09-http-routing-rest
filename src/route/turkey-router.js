@@ -1,6 +1,6 @@
 'use strict';
 
-const turkey = require('../model/turkey');
+const Turkey = require('../model/turkey');
 const logger = require('../lib/logger');
 const customResponse = require('../lib/response');
 
@@ -22,18 +22,18 @@ module.exports = (router) => {
 
 
   router.get('/api/v1/turkey', (request, response) => {
-    if(!request.url.query.id) {
-      customResponse.sendError(response, 404,'No ID');
+    if (!request.url.query.id) {
+      customResponse.sendError(response, 404, 'No ID');
       return undefined;
     }
     Turkey.findOne(request.url.query.id)
-    .then((turkey) => {
-      customResponse.sendJSON(response, 200, turkey);
-    })
-    .catch((err) => {
-      console.log(err);
-      customResponse.sendError(response, 404,err.message);
-    });
+      .then((turkey) => {
+        customResponse.sendJSON(response, 200, turkey);
+      })
+      .catch((err) => {
+        console.log(err);
+        customResponse.sendError(response, 404, err.message);
+      });
     return undefined;
   });
 
@@ -43,14 +43,14 @@ module.exports = (router) => {
       return undefined;
     }
     Turkey.deleteOne(request.url.query.id)
-    .then((turkey) => {
-      customResponse.sendJson(response, 200, turkey);
-      console.log(`${request.url.query.id} delete`);
-    })
-    .catch((err) => {
-      console.log(err);
-      customResponse.sendError(response, 404, err.message);
-    });
+      .then((turkey) => {
+        customResponse.sendJson(response, 200, turkey);
+        console.log(`${request.url.query.id} delete`);
+      })
+      .catch((err) => {
+        console.log(err);
+        customResponse.sendError(response, 404, err.message);
+      });
     return undefined;
   });
 
@@ -61,16 +61,14 @@ module.exports = (router) => {
       return undefinied;
     }
     Turkey.updateOne(request.body)
-    .then((turkey) => {
-      customeResponse.sendJSON(respsone, 200, turkey);
-      console.log(`${request.body.id} update`);
-    })
-    .catch((err) => {
-      console.log(err);
-      customResponse.sendError(response, 404, err.message);
-    });
+      .then((turkey) => {
+        customeResponse.sendJSON(respsone, 200, turkey);
+        console.log(`${request.body.id} update`);
+      })
+      .catch((err) => {
+        console.log(err);
+        customResponse.sendError(response, 404, err.message);
+      });
     return undefined;
-
   });
-
 };

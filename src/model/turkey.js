@@ -16,7 +16,7 @@ module.exports = class Turkey {
   }
 
   static fetchAll() {
-    return storage.fetchAll('Turkey', this)
+    return storage.fetchAll('Turkey', this);
   }
 
   static findOne(_id) {
@@ -24,10 +24,10 @@ module.exports = class Turkey {
   }
 
   static updateOne(query) {
-     return storage.updateOne('Turkey', query )
+    return storage.updateOne('Turkey', query);
   }
 
   static deleteOne(_id) {
-     return storage.deleteOne('Turkey', _id)
+    return storage.deleteOne('Turkey', _id);
   }
 };
