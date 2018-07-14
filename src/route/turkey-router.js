@@ -54,41 +54,6 @@ module.exports = (router) => {
       })
       .catch((error) => {
         customResponse.sendError(response, 404, error.message);
-
-
-  router.delete('.api/v1/turkey', (request, response) => {
-    if (!request.url.query.id) {
-      customResponse.sendError(response, 404, 'No ID');
-      return undefined;
-    }
-    Turkey.deleteOne(request.url.query.id)
-      .then((turkey) => {
-        customResponse.sendJson(response, 200, turkey);
-        console.log(`${request.url.query.id} delete`);
-      })
-      .catch((err) => {
-        console.log(err);
-        customResponse.sendError(response, 404, err.message);
-      });
-    return undefined;
-  });
-
-  router.put('api/v1/turkey', (request, response) => {
-    console.log('PUT /api/v1/turkey');
-    if (!request.body.id) {
-      customResponse.sendError(response, 404, 'Missing id');
-      return undefined;
-    }
-    Turkey.updateOne(request.body)
-      .then((turkey) => {
-        customResponse.sendJSON(response, 200, turkey);
-        console.log(`${request.body.id} update`);
-      })
-      .catch((err) => {
-        console.log(err);
-        customResponse.sendError(response, 404, err.message);
-
-
       });
     return undefined;
   });

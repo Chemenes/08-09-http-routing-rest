@@ -31,13 +31,5 @@ module.exports = (request) => {
     request.on('error', reject);
     return undefined;
   });
-
 };
-
-
-};
-
-
-};
-
 

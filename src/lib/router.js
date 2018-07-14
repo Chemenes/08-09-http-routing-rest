@@ -8,10 +8,6 @@ const customResponse = require('./response');
 module.exports = class Router {
   constructor() {
     this.routes = {
-
-      GET: {},
-
-
       GET: {},
       POST: {},
       PUT: {},
@@ -19,39 +15,6 @@ module.exports = class Router {
     
     };
   }
-
-  /*eslint-disable*/
-  /*
-    This next bit of code creates a set of functions that will accept route definitions.
-    When this completes, you will end up with functions created like
-    these (below), which you can later use to create actual routes
-    router.get = (endpoint, callback) = function(endpoint,callback) { router.routes[method][endpoint] = callback; }
-    router.post = (endpoint, callback) = function(endpoint,callback) { router.routes[method][endpoint] = callback; }
-    ...
-    So ... if you were to do this in some other module:
-      router.route.get('/foo', (req,res) => console.log("Hi"));
-      router.route.get('/bar', (req,res) => console.log("Bye"));
-      That would result in a new router table entries like this:
-      router.GET: {
-        '/foo': (req,res) => console.log("Hi")),
-        '/bar': (req,res) => console.log("Bye"))
-      }
-  */
-
-
-      GET: {
-        '/api/v1/turkey': (req,res) => {},
-        '/api/v1/turkey?id': (req,res) => {},
-      },
-
-      POST: {},
-      PUT: {},
-      DELETE: {},
-    };
-  }
-
-
-  
 
 
   get(endpoint, callback) {
@@ -86,15 +49,7 @@ module.exports = class Router {
 
         .catch((error) => {
           logger.log(logger.INFO, JSON.stringify(error));
-
-        .catch((err) => {
-
-          logger.log(logger.INFO, JSON.stringify(err));
-          // This might be better as a 400 perhaps
-
-          
-
-          customResponse.sendError(response, 404, 'Route Not Found');
+          customResponse.sendError(response, 404, 'Route Not Registered');
           return undefined;
         });
     };
