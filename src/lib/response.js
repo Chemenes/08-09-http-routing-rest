@@ -16,3 +16,4 @@ response.sendError = (res, status, msg) => {
   res.end();
   return undefined;
 };
+

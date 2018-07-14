@@ -1,13 +1,16 @@
 'use strict';
 
 const uuid = require('uuid/v4');
+
 const storage = require('../lib/storage');
+
 
 module.exports = class Turkey {
   constructor(config) {
     this._id = uuid();
     this.createdOn = new Date();
     this.flavor = config.flavor;
+
     this.style = config.style || '';
   }
 

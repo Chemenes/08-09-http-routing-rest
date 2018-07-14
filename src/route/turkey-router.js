@@ -7,6 +7,7 @@ const customResponse = require('../lib/response');
 module.exports = (router) => {
   router.post('/api/v1/turkey', (request, response) => {
     console.log(response, 'LOOOK HERE');
+
     logger.log(logger.INFO, 'ROUTE-TURKEY: POST /api/v1/turkey');
     const newTurkey = new Turkey(request.body);
     newTurkey.save()
@@ -38,6 +39,7 @@ module.exports = (router) => {
       });
     return undefined;
   });
+
 
   router.delete('/api/v1/turkey', (request, response) => {
     logger.log(logger.INFO, 'ROUTE-TURKEY: DELETE /api/v1/turkey');
