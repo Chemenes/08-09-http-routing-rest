@@ -33,14 +33,11 @@ storage.get = (schema, _id) => {
 };
 
 storage.delete = (schema, _id) => {
-  return new Promise ((resolve, reject) => {
-    if (!schema) return reject(new Error('Cannot delete item, schema required'));
-    if (!_id) return reject (new Error('Cannot delete item, ID required'));
-
-    if (memory[schema] [_id]) {
-      logger.log(logger.INFO, `STORAGE: Delete${JSON.stringify(item)}`);
-      return resolve(item);
-    }
-   
-  });
+  if (memory[schema][_id]) {
+    const del = memory[schema][_id];
+    delete memory[schema][_id];
+    return Promise.resolve(del);
+  }
+  return Promise.reject(new Error(`Schema ${schema} || ID ${_id} not found`));
 };
+

@@ -8,13 +8,11 @@ const customResponse = require('./response');
 module.exports = class Router {
   constructor() {
     this.routes = {
-      GET: {
-        '/api/v1/turkey': (req,res) => {},
-        '/api/v1/turkey?id': (req,res) => {},
-      },
+      GET: {},
       POST: {},
       PUT: {},
       DELETE: {},
+    
     };
   }
 

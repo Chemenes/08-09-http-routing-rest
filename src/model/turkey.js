@@ -32,19 +32,19 @@ module.exports = class Turkey {
  *
  * @returns {*}
  */
-  static fetchAll() {
-    // TODO: Bonus to write code to fetch user id's in the storage moduel
-  }
+  // static fetchAll() {
+   
+  // }
 
   static findOne(_id) {
     return storage.get('Turkeys', _id);
   }
 
   static updateOne(_id) {
-    // TODO: Bonus to write code here teo update a user in the storage module by targeting their ID
+    return storage.put('Turkeys', _id);
   }
 
-  static deleteOne(_id) {
-    // TODO: write code here to delete a user in the storage module by targeting their id
+  static delete(_id) {
+    return storage.delete('Turkeys', _id);
   }
 };

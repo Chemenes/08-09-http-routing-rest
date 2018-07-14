@@ -2,7 +2,7 @@
 
 const superagent = require('superagent');
 const server = require('../lib/server');
-const turkey = require('../model/turkey');
+const Turkey = require('../model/turkey');
 
 const apiUrl = 'http://localhost:5000/api/v1/turkey';
 
@@ -26,7 +26,6 @@ describe('POST to /api/v1/turkey', () => {
         expect(response.status).toEqual(200);
       })
       .catch((err) => {
-       
         throw err;
       });
   });
@@ -44,7 +43,7 @@ describe('POST to /api/v1/turkey', () => {
   });
 });
 
-describe('GET /api/v1/turkeys', () => {
+describe('GET /api/v1/turkey', () => {
   let mockResourceForGet;
   beforeEach(() => {
     const newTurkey = new Turkey(mockResource);
@@ -70,60 +69,61 @@ describe('GET /api/v1/turkeys', () => {
       });
   });
 
-  test ('404 bad GET request', () => {
+  test('404 bad GET request', () => {
     return superagent.get(`${apiUrl}`)
-    .then((response) => {
-      throw err;
-    })
-    .catch((err) => {
-      expect (err.status).toEqual(404);
-    });
-  }
+      .then((response) => {
+        throw response;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(404);
+      });
+  });
 });
 
-describe('DELETE /api/v1/turkeys', () => {
-  let mockResourceForGet;
-  beforeEach((done) => {
+describe('DELETE /api/v1/turkey', () => {
+  let mockResourceForDelete;
+  beforeEach(() => {
     const newTurkey = new Turkey(mockResource);
     newTurkey.save()
-    .then((turkey) => {
-      mockResourceForGet = turkey;
-      done();
-    })
-    .catch((err) => {
-      throw err;
-    });
+      .then((turkey) => {
+        mockResourceForDelete = turkey;
+      })
+      .catch((err) => {
+        throw err;
+      });
   });
-  test('200 successful DELETE request', () =>  {
-    console.log(`DELETE ${mockResponseForGet._id}`);
-    return superagent.delete(`${apiUrl}?id=${mockResponseForGet._id}`)
-    .then((response) => {
-      expect(response.status).toEqual(200);
-    })
-    .catch((err) => {
-      throw err;
-    });
+  test('200 successful DELETE request', () => {
+    // console.log(`DELETE ${mockResourceForDelete._id}`);
+    return superagent.delete(`${apiUrl}?id=${mockResourceForDelete._id}`)
+      .then((response) => {
+        expect(response.status).toEqual(204);
+      })
+      .catch((err) => {
+        throw err;
+      });
   });
   test('404 bad DELETE request', () => {
     return superagent.delete(`${apiUrl}`)
-    .then((response) => {
-      throw err;
-    })
-    .catch((err) => {
-      expect(err.status).toEqual(404);
-    });
-  });
-});
-describe('bad request no input', () => {
-  test('404 bad request', () => {
-    return superagent.get(`${apiUrl}`)
-    .then((response) => {
-      throw err;
-    })
-    .catch((err) => {
-      expect(err.status).toEqual(404);
-    });
+      .then((response) => {
+        throw response;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(404);
+      });
   });
 });
 
-//test
+describe('bad request no input', () => {
+  test('404 bad request', () => {
+    return superagent.get(`${apiUrl}`)
+      .then((response) => {
+        throw response;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(404);
+        expect(err).toBeInstanceOf(Error);
+      });
+  });
+});
+
+// test

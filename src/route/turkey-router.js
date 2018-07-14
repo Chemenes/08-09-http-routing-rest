@@ -1,11 +1,12 @@
 'use strict';
 
-const turkey = require('../model/turkey');
+const Turkey = require('../model/turkey');
 const logger = require('../lib/logger');
 const customResponse = require('../lib/response');
 
 module.exports = (router) => {
   router.post('/api/v1/turkey', (request, response) => {
+    console.log(response, 'LOOOK HERE');
     logger.log(logger.INFO, 'ROUTE-TURKEY: POST /api/v1/turkey');
     const newTurkey = new Turkey(request.body);
     newTurkey.save()
@@ -20,7 +21,7 @@ module.exports = (router) => {
       });
   });
 
-  // /api/v1/note?id=12335
+
   router.get('/api/v1/turkey', (request, response) => {
     if (!request.url.query.id) {
       customResponse.sendError(response, 404, 'Your request requires an id');
@@ -34,6 +35,23 @@ module.exports = (router) => {
       .catch((err) => {
         console.log(err);
         customResponse.sendError(response, 404, err.message);
+      });
+    return undefined;
+  });
+
+  router.delete('/api/v1/turkey', (request, response) => {
+    logger.log(logger.INFO, 'ROUTE-TURKEY: DELETE /api/v1/turkey');
+    if (!request.url.query.id) {
+      customResponse.sendError(response, 404, 'Your request requires an ID');
+      return undefined;
+    }
+
+    Turkey.delete(request.url.query.id)
+      .then((turkeyId) => {
+        customResponse.sendJSON(response, 204, turkeyId);
+      })
+      .catch((error) => {
+        customResponse.sendError(response, 404, error.message);
       });
     return undefined;
   });

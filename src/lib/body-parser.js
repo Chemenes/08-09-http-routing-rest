@@ -20,7 +20,6 @@ module.exports = (request) => {
     });
 
     request.on('end', () => {
-     
       try {
         request.body = JSON.parse(message);
         return resolve(request);
