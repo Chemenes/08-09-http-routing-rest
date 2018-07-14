@@ -9,15 +9,14 @@ module.exports = class Router {
   constructor() {
     this.routes = {
       GET: {
-        '/api/v1/turkey': (req,res) => {},
-        '/api/v1/turkey?id': (req,res) => {},
+        '/api/v1/turkey': (req, res) => {},
+        '/api/v1/turkey?id': (req, res) => {},
       },
       POST: {},
       PUT: {},
       DELETE: {},
     };
   }
-
   
 
   get(endpoint, callback) {
@@ -40,7 +39,6 @@ module.exports = class Router {
       Promise.all([bodyParser(request)])
      
         .then(() => {
-         
           const requestResponseCallback = this.routes[request.method][request.url.pathname];
           const isFunction = typeof requestResponseCallback === 'function';
           if (isFunction) return requestResponseCallback(request, response);
@@ -49,7 +47,6 @@ module.exports = class Router {
           return undefined;
         })
         .catch((err) => {
-          
           customResponse.sendError(response, 404, 'Route Not Found');
           return undefined;
         });
