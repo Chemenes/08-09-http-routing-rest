@@ -43,7 +43,8 @@ module.exports = class Router {
           customResponse.sendError(response, 404, 'Route Not Registered');
           return undefined;
         })
-        .catch((err) => {
+        .catch((error) => {
+          logger.log(logger.INFO, JSON.stringify(error));
           customResponse.sendError(response, 404, 'Route Not Found');
           return undefined;
         });
