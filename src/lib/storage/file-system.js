@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const fs = require('fs');
 
@@ -7,11 +7,11 @@ const dataDirectory = `${__dirname}/../../data`;
 
 storage.save = (schema, item) => {
   const file = `${dataDirectory}/${schema}/${item._id}.json`;
-  const json = Json.stringify(item);
+  const json = JSON.stringify(item);
   return new Promise((resolve, reject) => {
-    if (!schema) return reject(new Error ('Cannot create a new item, schema required'));
+    if (!schema) return reject(new Error('Cannot create a new item, schema required'));
     if (!item || !item.title) return reject(new Error('Cannot create a new item, item or title required'));
-    fs.writeFile(file,json, (err) => {
+    fs.writeFile(file, json, (err) => {
       if (err) return reject(err);
       return resolve(item);
     });
@@ -20,8 +20,8 @@ storage.save = (schema, item) => {
 };
 
 storage.get = (schema, _id) => {
-  const targetFile = `${dataDirectory}/${schema}/${item._id}.json`;
-  return new Promise ((resolve, reject) =>{
+  const targetFile = `${dataDirectory}/${schema}/${_id}.json`;
+  return new Promise((resolve, reject) => {
     fs.readFile(targetFile, (err, data) => {
       if (err) return reject(err);
       return resolve(JSON.parse(data.toString()));
@@ -31,9 +31,9 @@ storage.get = (schema, _id) => {
 
 storage.delete = (schema, _id) => {
   const targetFile = `${dataDirectory}/${schema}/${_id}.json`;
-  return new Promise ((resole, reject) => {
-    fs.unlink(targetFile, (err) =>{
-      if (err) return reject (err);
+  return new Promise((resolve, reject) => {
+    fs.unlink(targetFile, (err) => {
+      if (err) return reject(err);
       return resolve(_id);
     });
   });
