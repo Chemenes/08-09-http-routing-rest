@@ -10,6 +10,9 @@ module.exports = class Router {
     this.routes = {
 
       GET: {},
+
+
+      GET: {},
       POST: {},
       PUT: {},
       DELETE: {},
@@ -39,11 +42,14 @@ module.exports = class Router {
         '/api/v1/turkey': (req,res) => {},
         '/api/v1/turkey?id': (req,res) => {},
       },
+
       POST: {},
       PUT: {},
       DELETE: {},
     };
   }
+
+  
 
 
   get(endpoint, callback) {
@@ -85,6 +91,10 @@ module.exports = class Router {
           customResponse.sendError(response, 404, 'Route Not Registered');
           return undefined;
         })
+
+        .catch((error) => {
+          logger.log(logger.INFO, JSON.stringify(error));
+
         .catch((err) => {
 
           logger.log(logger.INFO, JSON.stringify(err));
