@@ -11,8 +11,8 @@ const mockResource = {
   style: 'test style',
 };
 
-beforeAll(() => server.serverStart(5000));
-afterAll(() => server.serverStop());
+beforeAll(() => server.start(5000));
+afterAll(() => server.stop());
 
 describe('post to /api/v1/turkey', () => {
   test('200 for successful saving of a new note', () => {
