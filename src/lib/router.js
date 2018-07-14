@@ -8,6 +8,7 @@ const customResponse = require('./response');
 module.exports = class Router {
   constructor() {
     this.routes = {
+
       GET: {},
       POST: {},
       PUT: {},
@@ -34,6 +35,17 @@ module.exports = class Router {
       }
   */
 
+      GET: {
+        '/api/v1/turkey': (req,res) => {},
+        '/api/v1/turkey?id': (req,res) => {},
+      },
+      POST: {},
+      PUT: {},
+      DELETE: {},
+    };
+  }
+
+
   get(endpoint, callback) {
     this.routes.GET[endpoint] = callback;
   }
@@ -52,6 +64,7 @@ module.exports = class Router {
   route() {
     return (request, response) => {
       Promise.all([bodyParser(request)])
+
         // no need for a Promise.all, but just 
         // demo'ing another Promise method we can use, 
         // where Promise.all takes an aray of promises and resolves them
@@ -61,6 +74,10 @@ module.exports = class Router {
         // with the reason of the first passed promise that rejects.
         .then(() => {
           // [request.method] = 'GET' 'POST' 'PUT' 'DELETE'
+
+     
+        .then(() => {
+
           const requestResponseCallback = this.routes[request.method][request.url.pathname];
           const isFunction = typeof requestResponseCallback === 'function';
           if (isFunction) return requestResponseCallback(request, response);
@@ -69,8 +86,12 @@ module.exports = class Router {
           return undefined;
         })
         .catch((err) => {
+
           logger.log(logger.INFO, JSON.stringify(err));
           // This might be better as a 400 perhaps
+
+          
+
           customResponse.sendError(response, 404, 'Route Not Found');
           return undefined;
         });
