@@ -58,11 +58,11 @@ module.exports = (router) => {
     console.log('PUT /api/v1/turkey');
     if (!request.body.id) {
       customResponse.sendError(response, 404, 'Missing id');
-      return undefinied;
+      return undefined;
     }
     Turkey.updateOne(request.body)
       .then((turkey) => {
-        customeResponse.sendJSON(respsone, 200, turkey);
+        customResponse.sendJSON(response, 200, turkey);
         console.log(`${request.body.id} update`);
       })
       .catch((err) => {
