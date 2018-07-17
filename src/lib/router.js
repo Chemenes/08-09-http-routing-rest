@@ -35,6 +35,7 @@ module.exports = class Router {
     return (request, response) => {
       Promise.all([bodyParser(request)])
 
+
         .then(() => {
           // [request.method] = 'GET' 'POST' 'PUT' 'DELETE'
           const requestResponseCallback = this.routes[request.method][request.url.pathname];
@@ -47,7 +48,11 @@ module.exports = class Router {
 
         .catch((error) => {
           logger.log(logger.INFO, JSON.stringify(error));
+
+          customResponse.sendError(response, 404, 'Route Not Registered');
+
           customResponse.sendError(response, 404, 'Route Not Found');
+
           return undefined;
         });
     };

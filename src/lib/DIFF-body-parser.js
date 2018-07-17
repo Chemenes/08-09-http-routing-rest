@@ -1,6 +1,5 @@
 'use strict';
 
-// THIS FILE IS JUST FOR DEMO PURPOSES TO SHOW DIFFERENCE IN REFACTOR
 
 const url = require('url');
 const queryString = require('querystring');
@@ -24,10 +23,6 @@ module.exports = function bodyParser(req) {
 
     req.on('end', () => {
       try {
-        // this takes the JSON message and turns it into a JS object, 
-
-        // and attaches it as the "body" propery on the bigger request object
-        // possible errors: passing in ' ', usually resuls in a SyntaxError
         req.body = JSON.parse(message);
         return resolve(req);
       } catch (err) {
