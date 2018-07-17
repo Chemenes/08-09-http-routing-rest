@@ -11,4 +11,4 @@ if (process.env.NODE_ENV !== 'production') {
   require('babel-register');
 }
 
-require('./src/lib/storage/main');
+require('./src/main');
