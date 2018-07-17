@@ -16,7 +16,6 @@ module.exports = class Router {
     };
   }
 
-
   get(endpoint, callback) {
     this.routes.GET[endpoint] = callback;
   }
@@ -49,7 +48,11 @@ module.exports = class Router {
 
         .catch((error) => {
           logger.log(logger.INFO, JSON.stringify(error));
+
           customResponse.sendError(response, 404, 'Route Not Registered');
+
+          customResponse.sendError(response, 404, 'Route Not Found');
+
           return undefined;
         });
     };

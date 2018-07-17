@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+
     "test": "eslint . --fix && jest --coverage --detectOpenHandles --forceExit --runInBand",
+
+ "test": "eslint . --fix && jest --coverage --detectOpenHandles --forceExit --runInBand",
+
     "testWatch": "jest --coverage --watchAll",
     "test-nolint": "jest --coverage",
     "lint": "eslint .",

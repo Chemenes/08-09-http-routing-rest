@@ -7,7 +7,6 @@ const storage = module.exports = {};
 
 const memory = {};
 
-
 storage.save = (schema, item) => {
   return new Promise((resolve, reject) => {
     if (!schema) return reject(new Error('Cannot create a new item, schema required'));
